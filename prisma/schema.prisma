@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model ColorScheme {
+  id        String @id @default(cuid())
+  cardColor String
+  textColor String
+  tasks Tasks[]
+  @@unique([cardColor, textColor])
+}
+
+model Tasks {
+  id            String       @id @unique
+  title         String?
+  description   String?
+  colorSchemeId String?
+  colorScheme   ColorScheme? @relation(fields: [colorSchemeId], references: [id])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
