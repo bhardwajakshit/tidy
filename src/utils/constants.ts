@@ -20,3 +20,8 @@ export const COLOR_SCHEMES = [
     placeholderTextColor: "placeholder:text-black/60",
   },
 ];
+
+export enum ROUTE {
+  AUTH = "/",
+  HOME = "/home",
+}
