@@ -60,8 +60,10 @@ export const TaskCard = ({
       dragConstraints={ref as RefObject<HTMLDivElement>}
       dragTransition={dragTransition}
     >
-      <h3 className="font-semibold text-lg">{title}</h3>
-      <p className="flex-1 font-mono">{description}</p>
+      <div className="flex flex-col gap-2">
+        <h3 className="font-semibold text-lg">{title}</h3>
+        <p className="flex-1 font-mono">{description}</p>
+      </div>
       <div className="flex justify-between mt-2">
         <span>{priority} Priority</span>
         <span className="text-xs">{date}</span>

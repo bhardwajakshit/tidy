@@ -1,11 +1,11 @@
 "use client";
 
 import { RefObject, useEffect, useRef, useState } from "react";
-import { TaskCard } from "../components/common/TaskCard";
-import { Header } from "../components/common/Header";
-import { Footer } from "../components/common/Footer";
+import { Header } from "@/components/common/Header";
+import { Footer } from "@/components/common/Footer";
 import { AnimatePresence } from "framer-motion";
-import { CreateTaskModal } from "../components/task/CreateTaskModal";
+import { CreateTaskModal } from "@/components/task/CreateTaskModal";
+import { TaskCard } from "@/components/common/TaskCard";
 
 export const devGoalsData = [
   {
@@ -79,32 +79,28 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <AnimatePresence>
-      <div
-        className="flex h-screen w-screen flex-col items-center justify-center bg-[#f8f7f1]"
-        ref={ref}
-      >
-        <Header />
+    <div
+      className="flex h-screen w-screen flex-col items-center justify-center"
+      ref={ref}
+    >
+      <Header />
 
-        {tasks.map((goal) => (
-          <TaskCard
-            key={goal.id}
-            bgColor={goal.bgColor}
-            textColor={goal.textColor}
-            title={goal.title}
-            description={goal.description}
-            priority={goal.priority}
-            date={goal.date}
-            ref={ref}
-          />
-        ))}
+      {tasks.map((goal) => (
+        <TaskCard
+          key={goal.id}
+          bgColor={goal.bgColor}
+          textColor={goal.textColor}
+          title={goal.title}
+          description={goal.description}
+          priority={goal.priority}
+          date={goal.date}
+          ref={ref}
+        />
+      ))}
 
-        {isModalOpen && (
-          <CreateTaskModal onClose={() => setIsModalOpen(false)} />
-        )}
+      {isModalOpen && <CreateTaskModal onClose={() => setIsModalOpen(false)} />}
 
-        <Footer />
-      </div>
-    </AnimatePresence>
+      {!isModalOpen && <Footer />}
+    </div>
   );
 }
