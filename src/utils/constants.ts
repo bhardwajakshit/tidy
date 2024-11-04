@@ -24,10 +24,6 @@ export const COLOR_SCHEMES = [
 export const devGoalsData = [
   {
     id: 1,
-    // colorScheme: {
-    //   bgColor: "bg-[#222222]",
-    //   textColor: "text-white",
-    // },
     bgColor: "bg-[#222222]",
     textColor: "text-white",
     title: "Learn TypeScript",
