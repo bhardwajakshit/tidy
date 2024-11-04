@@ -3,7 +3,6 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { AnimatePresence } from "framer-motion";
 import { CreateTaskModal } from "@/components/task/CreateTaskModal";
 import { TaskCard } from "@/components/common/TaskCard";
 import { devGoalsData } from "@/utils/constants";
