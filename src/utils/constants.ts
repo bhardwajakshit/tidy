@@ -67,4 +67,5 @@ export const devGoalsData = [
 export enum ROUTE {
   AUTH = "/",
   HOME = "/home",
+  PRIVACY_POLICY = "/privacy-policy",
 }

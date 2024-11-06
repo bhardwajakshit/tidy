@@ -18,7 +18,7 @@ export default function App({ children }: { children: React.ReactNode }) {
     const session = await supabase.auth.getSession();
 
     if (session.data.session) {
-      if (pathname !== ROUTE.HOME) {
+      if (pathname !== ROUTE.HOME && pathname !== ROUTE.PRIVACY_POLICY) {
         window.location.href = ROUTE.HOME;
       }
     } else if (pathname.includes(ROUTE.HOME)) {

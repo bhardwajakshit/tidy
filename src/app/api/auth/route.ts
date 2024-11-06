@@ -10,7 +10,7 @@ export async function POST(req: Request) {
           provider: "google",
           options: {
             redirectTo:
-              process.env.NEXT_PUBLIC_SITE_URL ||
+              process.env.NEXT_PUBLIC_BASE_URL ||
               "http://localhost:3000/dashboard",
           },
         });
