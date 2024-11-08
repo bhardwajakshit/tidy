@@ -46,7 +46,7 @@ export const CreateTaskModal = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full flex flex-col backdrop-blur-sm z-60">
+    <div className="absolute top-0 left-0 w-full h-full flex flex-col backdrop-blur-sm z-[60]">
       <div className="flex-grow flex flex-col items-center justify-center">
         <div
           className={`relative flex flex-col w-[400px] h-64 rounded-xl p-4 shadow-lg ${colorScheme.cardColor} ${colorScheme.textColor}`}
