@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
+import Image from "next/image";
+import { Tooltip } from "./Tooltip";
 
 export const Header = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -62,7 +64,7 @@ export const Header = () => {
       </motion.button>
       {showItems && (
         <motion.div
-          className="flex items-center justify-center gap-3"
+          className="flex items-center justify-center gap-3 relative"
           initial="hidden"
           animate="visible"
           variants={{
@@ -71,21 +73,26 @@ export const Header = () => {
           }}
         >
           <motion.button
-            className="flex items-center justify-center gap-2"
+            className="flex items-center justify-center gap-2 relative group"
             variants={itemVariants}
           >
-            <img
+            <Image
               src={user?.user_metadata?.avatar_url}
               alt="Profile"
-              className="w-6 h-6 rounded-full"
+              className="rounded-full"
+              width={20}
+              height={20}
             />
+            <Tooltip text="Profile" />
           </motion.button>
+
           <motion.button
             onClick={handleSignout}
-            className="flex items-center justify-center gap-2"
+            className="flex items-center justify-center gap-2 relative group"
             variants={itemVariants}
           >
-            <FiLogOut />
+            <FiLogOut size={20} />
+            <Tooltip text="Log out" />
           </motion.button>
         </motion.div>
       )}
