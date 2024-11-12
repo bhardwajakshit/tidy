@@ -1,33 +1,16 @@
-import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import Image from "next/image";
 import { Tooltip } from "./Tooltip";
+import { useSupabase } from "@/utils/providers/auth-provider";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, signOut } = useSupabase();
+  const router = useRouter();
   const [showItems, setShowItems] = useState<boolean>(false);
-  const supabase = createClient();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await supabase.auth.getUser();
-
-      if (user.data.user) {
-        setUser(user.data.user);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  const handleSignout = async () => {
-    await supabase.auth.signOut();
-    window.location.href = "/";
-  };
 
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 10 },
@@ -73,11 +56,12 @@ export const Header = () => {
           }}
         >
           <motion.button
+            onClick={() => router.push("/profile")}
             className="flex items-center justify-center gap-2 relative group"
             variants={itemVariants}
           >
             <Image
-              src={user?.user_metadata?.avatar_url}
+              src={user?.image || ""}
               alt="Profile"
               className="rounded-full"
               width={20}
@@ -87,7 +71,7 @@ export const Header = () => {
           </motion.button>
 
           <motion.button
-            onClick={handleSignout}
+            onClick={() => signOut()}
             className="flex items-center justify-center gap-2 relative group"
             variants={itemVariants}
           >
