@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const TypewriterText = ({
   text,
@@ -8,7 +8,7 @@ const TypewriterText = ({
   text: string;
   className: string;
 }) => {
-  const [displayedText, setDisplayedText] = useState<string>("");
+  const [displayedText, setDisplayedText] = useState<string>('');
   const [isBlinking, setIsBlinking] = useState<boolean>(true);
 
   useEffect(() => {

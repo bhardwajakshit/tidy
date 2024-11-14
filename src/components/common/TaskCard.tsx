@@ -1,5 +1,5 @@
-import { RefObject, useMemo, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { RefObject, useMemo, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 export const TaskCard = ({
   bgColor,
@@ -19,7 +19,7 @@ export const TaskCard = ({
   ref: RefObject<HTMLDivElement>;
 }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [notes, setNotes] = useState<string>("");
+  const [notes, setNotes] = useState<string>('');
   const [savedNotes, setSavedNotes] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [position, setPosition] = useState<{
@@ -47,15 +47,15 @@ export const TaskCard = ({
     e.preventDefault();
     if (notes.trim()) {
       setSavedNotes([...savedNotes, notes.trim()]);
-      setNotes("");
+      setNotes('');
     }
   };
 
   const variants = useMemo(() => {
     return {
       start: {
-        top: "50%",
-        left: "50%",
+        top: '50%',
+        left: '50%',
         opacity: 0,
       },
       end: {
@@ -69,11 +69,11 @@ export const TaskCard = ({
       },
       hover: {
         zIndex: 2,
-        cursor: "pointer",
+        cursor: 'pointer',
       },
       dragging: {
         zIndex: 2,
-        cursor: "grabbing",
+        cursor: 'grabbing',
       },
     };
   }, [position]);
@@ -86,7 +86,7 @@ export const TaskCard = ({
 
   return (
     <motion.div
-      className="w-[360px] h-60 absolute [perspective:1000px]"
+      className="absolute h-60 w-[360px] [perspective:1000px]"
       variants={variants}
       initial="start"
       animate="end"
@@ -101,30 +101,27 @@ export const TaskCard = ({
       dragTransition={dragTransition}
     >
       <div
-        className={`relative w-full h-full transition-all duration-500 [transform-style:preserve-3d] cursor-pointer
-          ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}
+        className={`relative h-full w-full cursor-pointer transition-all duration-500 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
         onClick={handleClick}
       >
         <div
-          className={`absolute w-full h-full [transform:rotateY(0deg)] [backface-visibility:hidden]
-            ${bgColor} ${textColor} text-sm font-normal rounded-lg p-4 shadow-md flex flex-col justify-between`}
+          className={`absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(0deg)] ${bgColor} ${textColor} flex flex-col justify-between rounded-lg p-4 text-sm font-normal shadow-md`}
         >
           <div className="flex flex-col gap-2">
-            <h3 className="font-semibold text-lg">{title}</h3>
+            <h3 className="text-lg font-semibold">{title}</h3>
             <p className="flex-1 font-mono">{description}</p>
           </div>
-          <div className="flex justify-between mt-2">
+          <div className="mt-2 flex justify-between">
             <span>{priority} Priority</span>
             <span className="text-xs">{date}</span>
           </div>
         </div>
 
         <div
-          className={`absolute w-full h-full [transform:rotateY(180deg)] [backface-visibility:hidden]
-            ${bgColor} ${textColor} text-sm font-normal rounded-lg p-4 shadow-md flex flex-col`}
+          className={`absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] ${bgColor} ${textColor} flex flex-col rounded-lg p-4 text-sm font-normal shadow-md`}
         >
-          <div className="flex justify-between mb-2">
-            <h3 className="font-semibold text-base">Notes for {title}</h3>
+          <div className="mb-2 flex justify-between">
+            <h3 className="text-base font-semibold">Notes for {title}</h3>
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -136,9 +133,9 @@ export const TaskCard = ({
             </button>
           </div>
 
-          <div className="flex-1 overflow-auto mb-2 space-y-2">
+          <div className="mb-2 flex-1 space-y-2 overflow-auto">
             {savedNotes.map((note, index) => (
-              <div key={index} className="p-2 bg-black/10 rounded">
+              <div key={index} className="rounded bg-black/10 p-2">
                 {note}
               </div>
             ))}
@@ -150,13 +147,13 @@ export const TaskCard = ({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 px-2 py-1 rounded bg-black/10 focus:outline-none focus:ring-2 focus:ring-black/20"
+              className="flex-1 rounded bg-black/10 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-black/20"
               placeholder="Add a note..."
             />
             <button
               type="submit"
               onClick={(e) => e.stopPropagation()}
-              className="px-3 py-1 rounded bg-black/10 hover:bg-black/20"
+              className="rounded bg-black/10 px-3 py-1 hover:bg-black/20"
             >
               Add
             </button>

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Header } from "@/components/common/Header";
-import { useSupabase } from "@/utils/providers/auth-provider";
-import Image from "next/image";
+import { Header } from '@/components/common/Header';
+import { useSupabase } from '@/utils/providers/auth-provider';
+import Image from 'next/image';
 
 export default function Profile() {
   const { user } = useSupabase();
@@ -12,9 +12,9 @@ export default function Profile() {
       <Header />
 
       <div>
-        <div className="flex justify-center mb-6">
+        <div className="mb-6 flex justify-center">
           <Image
-            src={user?.image || ""}
+            src={user?.image || ''}
             alt="Profile Picture"
             width={80}
             height={80}
@@ -22,7 +22,7 @@ export default function Profile() {
           />
         </div>
 
-        <div className="text-center mb-6">
+        <div className="mb-6 text-center">
           <h1 className="text-3xl font-medium text-gray-800">{user?.name}</h1>
           <p className="text-sm text-gray-500">{user?.email}</p>
         </div>

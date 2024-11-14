@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
-import { FiLogOut } from "react-icons/fi";
-import Image from "next/image";
-import { Tooltip } from "./Tooltip";
-import { useSupabase } from "@/utils/providers/auth-provider";
-import { useRouter } from "next/navigation";
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { BsThreeDots } from 'react-icons/bs';
+import { FiLogOut } from 'react-icons/fi';
+import Image from 'next/image';
+import { Tooltip } from './Tooltip';
+import { useSupabase } from '@/utils/providers/auth-provider';
+import { useRouter } from 'next/navigation';
 
 export const Header = () => {
   const { user, signOut } = useSupabase();
@@ -19,7 +19,7 @@ export const Header = () => {
       scale: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 300,
         damping: 20,
         duration: 0.5,
@@ -28,7 +28,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full p-6 gap-2">
+    <div className="flex w-full items-center justify-center gap-2 p-6">
       <motion.h1
         className="text-sm font-semibold"
         initial={{ opacity: 0 }}
@@ -47,7 +47,7 @@ export const Header = () => {
       </motion.button>
       {showItems && (
         <motion.div
-          className="flex items-center justify-center gap-3 relative"
+          className="relative flex items-center justify-center gap-3"
           initial="hidden"
           animate="visible"
           variants={{
@@ -56,12 +56,12 @@ export const Header = () => {
           }}
         >
           <motion.button
-            onClick={() => router.push("/profile")}
-            className="flex items-center justify-center gap-2 relative group"
+            onClick={() => router.push('/profile')}
+            className="group relative flex items-center justify-center gap-2"
             variants={itemVariants}
           >
             <Image
-              src={user?.image || ""}
+              src={user?.image || ''}
               alt="Profile"
               className="rounded-full"
               width={20}
@@ -72,7 +72,7 @@ export const Header = () => {
 
           <motion.button
             onClick={() => signOut()}
-            className="flex items-center justify-center gap-2 relative group"
+            className="group relative flex items-center justify-center gap-2"
             variants={itemVariants}
           >
             <FiLogOut size={20} />

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { createBrowserClient } from "@supabase/ssr";
-import { useRouter } from "next/navigation";
-import { User } from "@prisma/client";
-import axios from "axios";
-import { Loader } from "@/components/common/Loader";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { createBrowserClient } from '@supabase/ssr';
+import { useRouter } from 'next/navigation';
+import { User } from '@prisma/client';
+import axios from 'axios';
+import { Loader } from '@/components/common/Loader';
 
 type SupabaseContextType = {
   user: User | null;
@@ -15,7 +15,7 @@ type SupabaseContextType = {
 };
 
 const SupabaseContext = createContext<SupabaseContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function SupabaseProvider({ children }: { children: React.ReactNode }) {
@@ -23,15 +23,15 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  console.log("user in shared state: ", user)
+  console.log('user in shared state: ', user);
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );    
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
 
   useEffect(() => {
-    console.log("auth prov use effect ran!");
+    console.log('auth prov use effect ran!');
     const fetchUser = async () => {
       try {
         const {
@@ -39,17 +39,17 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
         } = await supabase.auth.getUser();
 
         if (user) {
-          console.log("session user is available, fetching user data from db");
+          console.log('session user is available, fetching user data from db');
           try {
-            const response = await axios.get("/api/user");
+            const response = await axios.get('/api/user');
             const userData = await response.data;
             setUser(userData);
           } catch (error) {
-            console.error("Error fetching user:", error);
+            console.error('Error fetching user:', error);
           }
         }
       } catch (error) {
-        console.error("Error fetching session user:", error);
+        console.error('Error fetching session user:', error);
       } finally {
         setLoading(false);
       }
@@ -60,7 +60,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
+      provider: 'google',
       options: {
         redirectTo: `${window.location.origin}/api/auth/callback`,
       },
@@ -70,10 +70,10 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
-    router.push("/");
+    router.push('/');
   };
 
-  if(loading) return <Loader/>
+  if (loading) return <Loader />;
 
   return (
     <SupabaseContext.Provider
@@ -92,7 +92,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
 export const useSupabase = () => {
   const context = useContext(SupabaseContext);
   if (context === undefined) {
-    throw new Error("useSupabase must be used inside SupabaseProvider");
+    throw new Error('useSupabase must be used inside SupabaseProvider');
   }
   return context;
 };

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -7,7 +7,7 @@ export async function GET() {
     const data = await prisma.tasks.findMany();
 
     if (!data) {
-      throw new Error("No tasks found");
+      throw new Error('No tasks found');
     }
 
     return new Response(JSON.stringify(data));

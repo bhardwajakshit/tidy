@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { AnimatePresence } from "framer-motion";
-import { QueryProvider } from "@/utils/providers/query-provider";
-import { SupabaseProvider } from "@/utils/providers/auth-provider";
+import { AnimatePresence } from 'framer-motion';
+import { QueryProvider } from '@/utils/providers/query-provider';
+import { SupabaseProvider } from '@/utils/providers/auth-provider';
 
 export default function App({ children }: { children: React.ReactNode }) {
   return (

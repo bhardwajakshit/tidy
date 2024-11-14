@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { RefObject, useEffect, useRef, useState } from "react";
-import { Header } from "@/components/common/Header";
-import { Footer } from "@/components/common/Footer";
-import { CreateTaskModal } from "@/components/task/CreateTaskModal";
-import { TaskCard } from "@/components/common/TaskCard";
-import { devGoalsData } from "@/utils/constants";
+import { RefObject, useEffect, useRef, useState } from 'react';
+import { Header } from '@/components/common/Header';
+import { Footer } from '@/components/common/Footer';
+import { CreateTaskModal } from '@/components/task/CreateTaskModal';
+import { TaskCard } from '@/components/common/TaskCard';
+import { devGoalsData } from '@/utils/constants';
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState(devGoalsData);
@@ -14,20 +14,20 @@ export default function Dashboard() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.metaKey && e.key === "k") {
+      if (e.metaKey && e.key === 'k') {
         e.preventDefault();
         setIsModalOpen(true);
       }
 
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         setIsModalOpen(false);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown, { capture: true });
+    window.addEventListener('keydown', handleKeyDown, { capture: true });
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown, { capture: true });
+      window.removeEventListener('keydown', handleKeyDown, { capture: true });
     };
   }, []);
 

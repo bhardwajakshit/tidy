@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 export const Loader = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex min-h-screen items-center justify-center">
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 0, 1, 0] }}
-        transition={{ duration: 2, repeat: Infinity}}
+        transition={{ duration: 2, repeat: Infinity }}
         className="text-3xl font-semibold"
       >
         .

@@ -1,23 +1,23 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
   const colorSchemes = [
     {
-      cardColor: "bg-[#222222]",
-      textColor: "text-white",
+      cardColor: 'bg-[#222222]',
+      textColor: 'text-white',
     },
     {
-      cardColor: "bg-[#c9c9c0]",
-      textColor: "text-black",
+      cardColor: 'bg-[#c9c9c0]',
+      textColor: 'text-black',
     },
     {
-      cardColor: "bg-[#967e76]",
-      textColor: "text-white",
+      cardColor: 'bg-[#967e76]',
+      textColor: 'text-white',
     },
     {
-      cardColor: "bg-[#99a98e]",
-      textColor: "text-black",
+      cardColor: 'bg-[#99a98e]',
+      textColor: 'text-black',
     },
   ];
 
@@ -38,6 +38,6 @@ async function main() {
 }
 
 main()
-  .then(() => console.log("Database seeded with color schemes!"))
+  .then(() => console.log('Database seeded with color schemes!'))
   .catch((e) => console.error(e))
   .finally(async () => await prisma.$disconnect());

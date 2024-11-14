@@ -1,15 +1,15 @@
-import { SwitchView } from "../task/SwitchView";
-import { KeyCombo, Keys } from "./KeyCombo";
+import { SwitchView } from '../task/SwitchView';
+import { KeyCombo, Keys } from './KeyCombo';
 
 export const Footer = () => {
   return (
-    <div className="flex items-center justify-center w-full mt-auto p-6">
+    <div className="mt-auto flex w-full items-center justify-center p-6">
       <div className="flex items-center justify-center gap-2">
-        <p className="font-normal text-xs text-primary/60">Press</p>
+        <p className="text-primary/60 text-xs font-normal">Press</p>
         <KeyCombo keyNames={[Keys.Command]} />
-        <p className="font-normal text-sm text-primary/60">+</p>
+        <p className="text-primary/60 text-sm font-normal">+</p>
         <KeyCombo keyNames={[Keys.K]} />
-        <p className="font-normal text-xs text-primary/60">
+        <p className="text-primary/60 text-xs font-normal">
           to create a new task.
         </p>
       </div>

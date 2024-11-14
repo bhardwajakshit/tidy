@@ -1,5 +1,5 @@
-import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import { createServerClient } from '@supabase/ssr';
+import { NextResponse, type NextRequest } from 'next/server';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -16,17 +16,17 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value)
+            request.cookies.set(name, value),
           );
           supabaseResponse = NextResponse.next({
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            supabaseResponse.cookies.set(name, value, options),
           );
         },
       },
-    }
+    },
   );
 
   const {
@@ -36,29 +36,29 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/_next") ||
-    pathname.includes(".")
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next') ||
+    pathname.includes('.')
   ) {
     return NextResponse.next();
   }
 
-  console.log("user in middleware: ", user?.email, request.nextUrl.pathname);
+  console.log('user in middleware: ', user?.email, request.nextUrl.pathname);
 
-  if (!user && pathname !== "/") {
+  if (!user && pathname !== '/') {
     // No user, redirect to login page
     const url = request.nextUrl.clone();
-    url.pathname = "/";
+    url.pathname = '/';
     return NextResponse.redirect(url);
   } else if (
     user &&
-    !["/home", "/profile", "/privacy-policy"].some((path) =>
-      pathname.includes(path)
+    !['/home', '/profile', '/privacy-policy'].some((path) =>
+      pathname.includes(path),
     )
   ) {
     // User logged in but accessing restricted path, redirect to home
     const url = request.nextUrl.clone();
-    url.pathname = "/home";
+    url.pathname = '/home';
     return NextResponse.redirect(url);
   }
 

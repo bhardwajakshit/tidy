@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen flex flex-col items-center py-10 px-4">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+    <div className="flex min-h-screen flex-col items-center px-4 py-10">
+      <h1 className="mb-6 text-2xl font-semibold text-gray-800">
         Privacy Policy
       </h1>
-      <div className="max-w-2xl text-gray-700 text-sm leading-relaxed space-y-6">
+      <div className="max-w-2xl space-y-6 text-sm leading-relaxed text-gray-700">
         <p>
           Welcome to <strong>Tidy</strong>. This Privacy Policy explains how we
           collect, use, and protect your information when you use our
@@ -14,11 +14,11 @@ export default function PrivacyPolicy() {
         </p>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             1. Information We Collect
           </h2>
           <p>When you sign in using Google OAuth, we may collect:</p>
-          <ul className="list-disc pl-4 space-y-1">
+          <ul className="list-disc space-y-1 pl-4">
             <li>Your email address</li>
             <li>
               Your Google profile information (e.g., name, profile picture)
@@ -31,11 +31,11 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             2. How We Use Your Information
           </h2>
           <p>Your information is used for:</p>
-          <ul className="list-disc pl-4 space-y-1">
+          <ul className="list-disc space-y-1 pl-4">
             <li>Authenticating and logging you into the app</li>
             <li>Personalizing your experience</li>
             <li>Communicating updates or important information</li>
@@ -43,18 +43,18 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             3. Data Sharing
           </h2>
           <p>We do not share your data with third parties, except:</p>
-          <ul className="list-disc pl-4 space-y-1">
+          <ul className="list-disc space-y-1 pl-4">
             <li>When required by law</li>
             <li>To protect the rights and safety of our users or others</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             4. Data Retention
           </h2>
           <p>
@@ -65,17 +65,17 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             5. Your Rights
           </h2>
-          <ul className="list-disc pl-4 space-y-1">
+          <ul className="list-disc space-y-1 pl-4">
             <li>Access and update your information</li>
             <li>Delete your account and data</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             6. Security
           </h2>
           <p>
@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             7. Changes to This Privacy Policy
           </h2>
           <p>
@@ -95,12 +95,12 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-gray-800 mb-2">
+          <h2 className="mb-2 text-lg font-medium text-gray-800">
             8. Contact Us
           </h2>
           <p>For questions or concerns, contact us at:</p>
           <p>
-            Email:{" "}
+            Email:{' '}
             <a
               href="mailto:support@tidy.run"
               className="text-blue-500 hover:underline"
