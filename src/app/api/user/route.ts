@@ -10,8 +10,6 @@ export async function GET() {
       data: { user },
     } = await supabase.auth.getUser();
 
-    console.log('user in /user: ', user);
-
     if (!user) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
@@ -21,8 +19,6 @@ export async function GET() {
       user.user_metadata.full_name || null,
       user.user_metadata.avatar_url || null,
     );
-
-    console.log('get or create user: ', newUser);
 
     return NextResponse.json(newUser);
   } catch (error) {
