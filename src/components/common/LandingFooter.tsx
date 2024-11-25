@@ -25,7 +25,7 @@ export const LandingFooter = () => {
         |
       </span>
       <a
-        href="https://tidy.run/privacy-policy"
+        href={`${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy`}
         target="_blank"
         rel="noopener noreferrer"
         className="text-xs font-normal text-tidy-black/30 transition-all duration-300 hover:text-tidy-black/80"

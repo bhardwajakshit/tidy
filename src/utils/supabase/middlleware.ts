@@ -45,7 +45,7 @@ export async function updateSession(request: NextRequest) {
 
   console.log('user in middleware: ', user?.email, request.nextUrl.pathname);
 
-  if (!user && pathname !== '/') {
+  if (!user && pathname !== '/' && !pathname.includes('/privacy-policy')) {
     // No user, redirect to login page
     const url = request.nextUrl.clone();
     url.pathname = '/';
