@@ -1,27 +1,30 @@
-import { RefObject, useMemo, useState, useEffect } from 'react';
+import {
+  RefObject,
+  useMemo,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { Task } from '@/app/home/page';
+import { BsTrash } from 'react-icons/bs';
+import { formatDateWithSuffix } from '@/utils/utils';
+import { FaCircleChevronLeft } from 'react-icons/fa6';
 
 export const TaskCard = ({
-  bgColor,
-  textColor,
-  title,
-  description,
-  priority,
-  date,
   ref,
+  task,
+  setTasks,
 }: {
-  bgColor: string;
-  textColor: string;
-  title: string;
-  description: string;
-  priority: string;
-  date: string;
   ref: RefObject<HTMLDivElement>;
+  task: Task;
+  setTasks: Dispatch<SetStateAction<Task[]>>;
 }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [notes, setNotes] = useState<string>('');
-  const [savedNotes, setSavedNotes] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [note, setNote] = useState<string>('');
   const [position, setPosition] = useState<{
     top: number;
     left: number;
@@ -43,11 +46,42 @@ export const TaskCard = ({
     });
   }, []);
 
-  const handleAddNote = (e: React.FormEvent) => {
+  const handleAddNote = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (notes.trim()) {
-      setSavedNotes([...savedNotes, notes.trim()]);
-      setNotes('');
+    try {
+      await axios.patch('/api/tasks', {
+        id: task.id,
+        notes: [...task.notes, note],
+      });
+
+      setNote('');
+      setTasks((prevTasks: Task[]) => {
+        const updatedTasks = prevTasks.map((t: Task) => {
+          if (t.id === task.id) {
+            return {
+              ...t,
+              notes: [...t.notes, note],
+            };
+          }
+          return t;
+        });
+        return updatedTasks;
+      });
+    } catch {
+      console.error('Error adding note');
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete('/api/tasks', {
+        data: { id: task.id },
+      });
+      setTasks((prevTasks: Task[]) =>
+        prevTasks.filter((t: Task) => t.id !== task.id),
+      );
+    } catch {
+      console.error('Error deleting task');
     }
   };
 
@@ -84,6 +118,8 @@ export const TaskCard = ({
     }
   };
 
+  const formattedDate = formatDateWithSuffix(task.createdAt);
+
   return (
     <motion.div
       className="absolute h-60 w-[360px] [perspective:1000px]"
@@ -105,49 +141,56 @@ export const TaskCard = ({
         onClick={handleClick}
       >
         <div
-          className={`absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(0deg)] ${bgColor} ${textColor} flex flex-col justify-between rounded-lg p-4 text-sm font-normal shadow-md`}
+          className={`absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(0deg)] ${task.cardColor} ${task.textColor} flex flex-col justify-between rounded-lg p-4 text-sm font-normal shadow-md`}
         >
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-semibold">{title}</h3>
-            <p className="flex-1 font-mono">{description}</p>
+            <h3 className="text-lg font-medium">{task.title}</h3>
+            <p className="flex-1 font-mono">{task.description}</p>
           </div>
-          <div className="mt-2 flex justify-between">
-            <span>{priority} Priority</span>
-            <span className="text-xs">{date}</span>
+          <div className="mt-2 flex items-center justify-between text-xs">
+            <span>{task.priority} Priority</span>
+            <span>{formattedDate}</span>
           </div>
         </div>
 
         <div
-          className={`absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] ${bgColor} ${textColor} flex flex-col rounded-lg p-4 text-sm font-normal shadow-md`}
+          className={`absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] ${task.cardColor} ${task.textColor} flex flex-col rounded-lg p-4 text-sm font-normal shadow-md`}
         >
           <div className="mb-2 flex justify-between">
-            <h3 className="text-base font-semibold">Notes for {title}</h3>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsFlipped(false);
-              }}
-              className="hover:opacity-70"
-            >
-              ←
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsFlipped(false);
+                }}
+                className="hover:opacity-70"
+              >
+                <FaCircleChevronLeft size={16} />
+              </button>
+              <h3 className="text-base font-medium">Notes</h3>
+            </div>
+
+            <button onClick={handleDelete} className="hover:opacity-70">
+              <BsTrash size={16} />
             </button>
           </div>
 
           <div className="mb-2 flex-1 space-y-2 overflow-auto">
-            {savedNotes.map((note, index) => (
-              <div key={index} className="rounded bg-black/10 p-2">
-                {note}
-              </div>
-            ))}
+            {task.notes.length > 0 &&
+              task.notes.map((note, index) => (
+                <div key={index} className="rounded bg-black/10 p-2">
+                  {note}
+                </div>
+              ))}
           </div>
 
           <form onSubmit={handleAddNote} className="flex gap-2">
             <input
               type="text"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 rounded bg-black/10 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-black/20"
+              className="flex-1 rounded bg-black/10 px-2 py-1 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black/20"
               placeholder="Add a note..."
             />
             <button
