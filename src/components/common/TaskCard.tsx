@@ -190,7 +190,7 @@ export const TaskCard = ({
               value={note}
               onChange={(e) => setNote(e.target.value)}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 rounded bg-black/10 px-2 py-1 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black/20"
+              className="flex-1 rounded bg-black/10 px-2 py-1 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-black/20"
               placeholder="Add a note..."
             />
             <button
