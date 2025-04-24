@@ -8,7 +8,7 @@ import axios from 'axios';
 import { ConfirmModal } from '@/components/profile/ConfirmModal';
 
 export default function Profile() {
-  const { user } = useSupabase();
+  const { user, signOut } = useSupabase();
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
@@ -16,8 +16,7 @@ export default function Profile() {
     try {
       setIsDeleting(true);
       await axios.delete('/api/user');
-      setShowDeleteModal(false);
-      window.location.href = '/';
+      signOut();
     } catch (error) {
       setIsDeleting(false);
       console.error(error);
