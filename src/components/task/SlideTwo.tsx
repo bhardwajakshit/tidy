@@ -68,14 +68,7 @@ export const SlideTwo = ({
                       }}
                     />
                   )}
-                  <motion.div
-                    className={`relative mb-1 h-1.5 w-1.5 rounded-full ${isActive ? bg : 'bg-gray-500'}`}
-                    animate={{
-                      scale: isActive ? 1.2 : 1,
-                    }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  />
-                  <span className="relative z-10">{level}</span>
+                  <span className="relative z-10 font-semibold">{level}</span>
                 </label>
               </div>
             );
