@@ -80,14 +80,15 @@ export default function Dashboard() {
         <Loader />
       )}
 
-      {isModalOpen && (
+      {(isModalOpen || tasks.length === 0) && (
         <CreateTaskModal
+          tasks={tasks}
           onClose={() => setIsModalOpen(false)}
           updateTasks={setTasks}
         />
       )}
 
-      {!isModalOpen && <Footer />}
+      {!isModalOpen && tasks.length > 0 && <Footer />}
     </div>
   );
 }

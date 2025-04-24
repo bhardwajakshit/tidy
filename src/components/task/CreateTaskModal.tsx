@@ -16,9 +16,11 @@ export type TaskData = {
 };
 
 export const CreateTaskModal = ({
+  tasks,
   onClose,
   updateTasks,
 }: {
+  tasks: Task[];
   onClose: () => void;
   updateTasks: Dispatch<SetStateAction<Task[]>>;
 }) => {
@@ -122,13 +124,15 @@ export const CreateTaskModal = ({
         </div>
       </div>
 
-      <div className="mt-auto flex w-full items-center justify-center p-6">
-        <div className="flex items-center justify-center gap-2">
-          <p className="text-primary/60 text-xs font-normal">Press</p>
-          <KeyCombo keyNames={[Keys.Escape]} />
-          <p className="text-primary/60 text-xs font-normal">to discard.</p>
+      {tasks.length > 0 && (
+        <div className="mt-auto flex w-full items-center justify-center p-6">
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-primary/60 text-xs font-normal">Press</p>
+            <KeyCombo keyNames={[Keys.Escape]} />
+            <p className="text-primary/60 text-xs font-normal">to discard.</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
