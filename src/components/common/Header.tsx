@@ -30,10 +30,11 @@ export const Header = () => {
   return (
     <div className="flex w-full items-center justify-center gap-2 p-6">
       <motion.h1
-        className="text-sm font-semibold"
+        className="cursor-pointer text-sm font-semibold"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
+        onClick={() => router.push('/home')}
       >
         Tidy
       </motion.h1>
