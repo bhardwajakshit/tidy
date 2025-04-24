@@ -1,4 +1,3 @@
-import { SwitchView } from '../task/SwitchView';
 import { KeyCombo, Keys } from './KeyCombo';
 
 export const Footer = () => {
@@ -13,7 +12,6 @@ export const Footer = () => {
           to create a new task.
         </p>
       </div>
-      {/* <SwitchView /> */}
     </div>
   );
 };
