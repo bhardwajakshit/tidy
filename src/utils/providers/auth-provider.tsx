@@ -23,15 +23,12 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  console.log('user in shared state: ', user);
-
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
 
   useEffect(() => {
-    console.log('auth prov use effect ran!');
     const fetchUser = async () => {
       try {
         const {
@@ -39,7 +36,6 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
         } = await supabase.auth.getUser();
 
         if (user) {
-          console.log('session user is available, fetching user data from db');
           try {
             const response = await axios.get('/api/user');
             const userData = await response.data;
