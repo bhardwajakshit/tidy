@@ -40,6 +40,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
             const response = await axios.get('/api/user');
             const userData = await response.data;
             setUser(userData);
+            router.push('/home');
           } catch (error) {
             console.error('Error fetching user:', error);
           }
