@@ -62,6 +62,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
       },
     });
     if (error) throw error;
+    router.push('/home');
   };
 
   const signOut = async () => {
